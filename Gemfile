@@ -7,6 +7,8 @@ gem "rails", "~> 7.1.1"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails', :require => 'sprockets/railtie'
+# Gemfile
+gem 'kaminari'
 
 
 # Use mysql as the database for Active Record

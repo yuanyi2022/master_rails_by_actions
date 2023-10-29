@@ -1,2 +1,49 @@
-<h1>Admin::Tickets#index</h1>
-<p>Find me in app/views/admin/tickets/index.html.erb</p>
+<div>
+  <div class="pull-right">
+    <%= link_to "新建电影", new_admin_ticket_path, class: "btn btn-primary" %>
+  </div>
+
+  <h1>
+    电影(<%= @tickets.total_count %>)
+  </h1>
+</div>
+
+<div>
+  <table class="table table-striped">
+    <tr>
+      <th>id</th>
+      <th>电影名称</th>
+      <th>上映时间</th>
+      <th>时长</th>
+      <th>库存</th>
+      <th>价格</th>
+      <th>状态</th>
+      <th>描述</th>
+      <th>创建时间</th>
+      <th>更新时间</th>
+
+    </tr>
+
+    <% @tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.id %></td>
+        <td><%= ticket.movie_name %></td>
+        <td><%= ticket.show_time %></td>
+        <td><%= ticket.duration %></td>
+        <td><%= ticket.stock %></td>
+        <td><%= ticket.price %></td>
+        <td><%= ticket.status %></td>
+        <td><%= ticket.description %></td>
+        <td><%= ticket.created_at %></td>
+        <td><%= ticket.updated_at %></td>
+
+        <td align="right">
+          <%= link_to "编辑", edit_admin_ticket_path(ticket) %>
+          <%= link_to "删除", admin_ticket_path(ticket), method: :delete, 'data-confirm': "确认删除吗?" %>
+        </td>
+      </tr>
+    <% end -%>
+  </table>
+
+  <%= paginate @tickets %>
+</div>

@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_28_130614) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_29_155413) do
+  create_table "tickets", force: :cascade do |t|
+    t.string "movie_name"
+    t.datetime "show_time"
+    t.integer "duration"
+    t.integer "stock"
+    t.integer "price"
+    t.string "status"
+    t.string "uuid"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
