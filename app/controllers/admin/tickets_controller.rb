@@ -1,4 +1,4 @@
-class Admin::TicketsController < ApplicationController
+class Admin::TicketsController < Admin::BaseController
   def index
   end
 

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # get "up" => "rails/health#show", as: :rails_health_check
   devise_for :users
   namespace :admin do
-    root 'session#new'
+    root 'sessions#new'
     resources :sessions
     resources :tickets
   end
