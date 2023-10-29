@@ -19,6 +19,7 @@ module MasterRailsByActions
     config.generators do |generator|
       generator.asserts false
       generator.test_framework false
+      generator.skip_routes true
     end
     # Configuration for the application, engines, and railties goes here.
     #
