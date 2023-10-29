@@ -5,11 +5,11 @@ class Admin::TicketsController < Admin::BaseController
   end
 
   def new
-    @tickets = Ticket.new
+    @ticket = Ticket.new
   end
   def create
-    @tickets = Ticket.new(params.require(:ticket).permit!)
-    if @tickets.save
+    @ticket = Ticket.new(params.require(:ticket).permit!)
+    if @ticket.save
       flash[:notice] = "Ticket created successfully"
       redirect_to admin_tickets_path
     else
@@ -19,15 +19,15 @@ class Admin::TicketsController < Admin::BaseController
   end
 
   def edit
-    @tickets = Ticket.find(params[:id])
+    @ticket = Ticket.find(params[:id])
     render action: :new
 
   end
 
   def update
-  @tickets = Ticket.find(params[:id])
-  @tickets.attributes = params.require(:ticket).permit!
-  if @tickets.save
+  @ticket = Ticket.find(params[:id])
+  @ticket.attributes = params.require(:ticket).permit!
+  if @ticket.save
     flash[:notice] = "Ticket updated successfully"
     redirect_to admin_tickets_path
   else
@@ -36,8 +36,8 @@ class Admin::TicketsController < Admin::BaseController
   end
 
   def destroy
-    @tickets = Ticket.find(params[:id])
-    if @tickets.destroy
+    @ticket = Ticket.find(params[:id])
+    if @ticket.destroy
       flash[:notice] = "Ticket deleted successfully"
       redirect_to admin_tickets_path
     else

@@ -1,2 +1,87 @@
-<h1>Admin::Tickets#new</h1>
-<p>Find me in app/views/admin/tickets/new.html.erb</p>
+<div>
+  <h1><%= @ticket.new_record? ? "新建" : "修改 ##{params[:id]}" %></h1>
+</div>
+
+<div class="form-body">
+  <%= form_for @ticket,
+               url: (@ticket.new_record? ? admin_tickets_path : admin_ticket_path(@ticket)),
+               method: (@ticket.new_record? ? 'post' : 'put'),
+               html: { class: 'form-horizontal' } do |f| %>
+
+    <% unless @ticket.errors.blank? %>
+      <div class="alert alert-danger">
+        <ul class="list-unstyled">
+          <% @ticket.errors.messages.values.flatten.each do |error| %>
+            <li><i class="fa fa-exclamation-circle"></i> <%= error %></li>
+          <% end -%>
+        </ul>
+      </div>
+    <% end -%>
+<!--    create_table "tickets", force: :cascade do |t|-->
+<!--    t.string "movie_name"-->
+<!--    t.datetime "show_time"-->
+<!--    t.integer "duration"-->
+<!--    t.integer "stock"-->
+<!--    t.integer "price"-->
+<!--    t.string "status"-->
+<!--    t.string "uuid"-->
+<!--    t.text "description"-->
+<!--    t.datetime "created_at", null: false-->
+<!--    t.datetime "updated_at", null: false-->
+<!--    end-->
+
+    <div class="form-group">
+      <label for="movie_name" class="col-sm-2 control-label">电影名称*:</label>
+      <div class="col-sm-5">
+        <%= f.text_field :movie_name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="show_time" class="col-sm-2 control-label">上映时间*:</label>
+      <div class="col-sm-5">
+        <%= f.text_field :show_time, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="duration" class="col-sm-2 control-label">时长*:</label>
+      <div class="col-sm-5">
+        <%= f.text_field :duration, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="stock" class="col-sm-2 control-label">库存*:</label>
+      <div class="col-sm-5">
+        <%= f.text_field :stock, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="price" class="col-sm-2 control-label">价格*:</label>
+      <div class="col-sm-5">
+        <%= f.text_field :price, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description" class="col-sm-2 control-label">描述*:</label>
+      <div class="col-sm-5">
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="movie_name" class="col-sm-2 control-label">上下架状态:*</label>
+      <div class="col-sm-5">
+        <select name="ticket[status]">
+          <% [[Ticket::Status::On, '上架'], [Ticket::Status::Off, '下架']].each do |row| %>
+            <option value="<%= row.first %>" <%= 'selected' if @ticket.status == row.first %>><%= row.last %></option>
+          <% end -%>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-8">
+        <%= f.submit (@ticket.new_record? ? "新建" : "编辑"), class: "btn btn-default" %>
+      </div>
+    </div>
+  <% end -%>
+</div>

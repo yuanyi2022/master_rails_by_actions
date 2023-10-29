@@ -12,6 +12,11 @@ class Ticket < ApplicationRecord
   validates :status, inclusion: { in: %w[on off], message: "状态必须是上架或下架" }
   validates :description, presence: { message: "描述不能为空" }
   before_create :set_uuid
+
+  module Status
+    On = 'on'
+    Off = 'off'
+  end
   private
   def set_uuid
     self.uuid = SecureRandom.uuid
