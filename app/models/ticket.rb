@@ -12,10 +12,21 @@ class Ticket < ApplicationRecord
   validates :status, inclusion: { in: %w[on off], message: "状态必须是上架或下架" }
   validates :description, presence: { message: "描述不能为空" }
   before_create :set_uuid
-
+  has_one_attached :image
   module Status
     On = 'on'
     Off = 'off'
+  end
+  def small_image
+    image.variant(resize: "60x60^").processed
+  end
+
+  def middle_image
+    image.variant(resize: "200x200^").processed
+  end
+
+  def big_image
+    image.variant(resize: "960x").processed
   end
   private
   def set_uuid
